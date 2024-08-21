@@ -4,6 +4,7 @@ import logging
 from django.http import JsonResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters
+from wxcloudrun.models import MyUserModel
 
 
 logger = logging.getLogger('log')
@@ -17,6 +18,14 @@ def index(request, _):
     """
 
     return render(request, 'index.html')
+
+def signup(request,_):
+    header=request.header
+    method=request.method
+    print(header)
+
+
+
 
 
 def counter(request, _):

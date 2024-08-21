@@ -23,4 +23,7 @@ urlpatterns = (
 
     # 获取主页
     url(r'(/)?$', views.index),
+
+    # 计数器接口
+    url(r'^^api/signup(/)?$', views.signup),
 )
