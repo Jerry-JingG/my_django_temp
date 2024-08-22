@@ -24,7 +24,13 @@ def signup(request,_):
     header=request.headers
     method=request.method
     openid=header.get('X-WX-OPENID')
-    return JsonResponse({'status': "OK", 'errorMsg': '请求成功', 'openid':openid,'method':method})
+    data=json.loads(request.body)
+    wb_id=data.get('wb_id')
+    avatar_url=data.get('avatarUrl')
+    nickname=data.get('userInfo')
+    amount=data.get('how_much')
+    return JsonResponse({'status': "OK", 'errorMsg': '请求成功', 'openid':openid,'method':method,
+                         'wb_id':wb_id,'avatar_url':avatar_url,'nickname':nickname,'amount':amount},)
     
 
 def counter(request, _):
