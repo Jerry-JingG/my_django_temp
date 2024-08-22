@@ -24,12 +24,9 @@ def signup(request,_):
     header=request.header
     method=request.method
     openid=header.get('X-WX-OPENID')
-    return HttpResponse("hello")
+    return JsonResponse({'code': 1, 'errorMsg': '请求成功'},
+                            json_dumps_params={'ensure_ascii': False})
     
-
-
-
-
 
 def counter(request, _):
     """
