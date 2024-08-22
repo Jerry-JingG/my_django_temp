@@ -2,6 +2,7 @@ import json
 import logging
 
 from django.http import JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters
 from wxcloudrun.models import MyUserModel
@@ -22,7 +23,9 @@ def index(request, _):
 def signup(request,_):
     header=request.header
     method=request.method
-    print(header)
+    openid=header.get('X-WX-OPENID')
+    return HttpResponse("hello")
+    
 
 
 
