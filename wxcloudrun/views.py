@@ -32,15 +32,17 @@ def signup(request,_):
     timestamp=data.get('timestamp')
 
     #create donation
-    donation=Donation()
-    donation.nickname=nickname
-    # donation.avatar_url=avatar_url
-    # donation.wb_id=wb_id
-    # donation.amout=amount
-    # donation.created_at=timestamp
+    donation = Donation(
+    openid=openid,
+    nickname=nickname,
+    avatar_url=avatar_url,
+    wb_id=wb_id,
+    amout=amount,
+    created_at=timestamp
+    )
 
     return JsonResponse({'status': "OK", 'errorMsg': '请求成功', 'openid':openid,'method':method,
-                         'wb_id':wb_id,'avatar_url':avatar_url,'nickname':nickname,'amount':amount,'time':timestamp,'donation':donation,'donation_n':donation.nickname},)
+                         'wb_id':wb_id,'avatar_url':avatar_url,'nickname':nickname,'amount':amount,'time':timestamp},)
     
 
 def counter(request, _):
