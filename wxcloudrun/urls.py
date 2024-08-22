@@ -19,11 +19,12 @@ from django.conf.urls import url
 
 urlpatterns = (
     # 计数器接口
+    url(r'^^api/signup(/)?$', views.signup),
+    # 计数器接口
     url(r'^^api/count(/)?$', views.counter),
 
     # 获取主页
     url(r'(/)?$', views.index),
 
-    # 计数器接口
-    url(r'^^api/signup(/)?$', views.signup),
+
 )
