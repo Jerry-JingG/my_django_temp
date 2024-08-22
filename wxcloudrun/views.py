@@ -40,9 +40,10 @@ def signup(request,_):
     amout=amount,
     created_at=timestamp
     )
+    donation.save()
 
     return JsonResponse({'status': "OK", 'errorMsg': '请求成功', 'openid':openid,'method':method,
-                         'wb_id':wb_id,'avatar_url':avatar_url,'nickname':nickname,'amount':amount,'time':timestamp,'donation':donation},)
+                         'wb_id':wb_id,'avatar_url':avatar_url,'nickname':nickname,'amount':amount,'time':timestamp},)
     
 
 def counter(request, _):
