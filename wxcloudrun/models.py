@@ -23,7 +23,7 @@ class Donation(models.Model):
     wb_id=models.CharField(max_length=50)                  #记录用户微博id
     avatar_url = models.CharField(max_length=100)    #记录用户头像
     created_at = models.DateTimeField(default=datetime.now())   #记录时间
-    amout=models.FloatField()                              # 记录金额 
+    amount=models.FloatField()                              # 记录金额 
     def __str__(self):
         return self.openid
     class Meta:
