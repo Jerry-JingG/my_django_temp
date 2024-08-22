@@ -18,10 +18,10 @@ class Counters(models.Model):
 
 
 class Donation(models.Model):
-    openid = models.CharField(max_length=50)               #记录用户openid方便获取信息操作
+    openid = models.CharField(max_length=100)               #记录用户openid方便获取信息操作
     nickname = models.CharField(max_length=50)             #记录用户昵称
     wb_id=models.CharField(max_length=50)                  #记录用户微博id
-    avatar_url = models.CharField(max_length=100)    #记录用户头像
+    avatar_url = models.CharField(max_length=200)    #记录用户头像
     created_at = models.DateTimeField(default=datetime.now())   #记录时间
     amount=models.FloatField()                              # 记录金额 
     def __str__(self):
