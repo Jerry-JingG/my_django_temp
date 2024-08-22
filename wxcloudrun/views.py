@@ -22,8 +22,8 @@ def index(request, _):
 
 def signup(request,_):
     header=request.header
-    method=request.method
-    openid=header.get('X-WX-OPENID')
+    # method=request.method
+    # openid=header.get('X-WX-OPENID')
     return JsonResponse({'status': "OK", 'errorMsg': '请求成功', 'openid':openid,'method':method})
     
 
