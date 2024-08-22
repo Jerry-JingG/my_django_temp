@@ -21,10 +21,10 @@ def index(request, _):
     return render(request, 'index.html')
 
 def signup(request,_):
-    # header=request.header
-    # method=request.method
-    # openid=header.get('X-WX-OPENID')
-    return JsonResponse({'status': "OK", 'errorMsg': '请求成功'})
+    header=request.header
+    method=request.method
+    openid=header.get('X-WX-OPENID')
+    return JsonResponse({'status': "OK", 'errorMsg': '请求成功', 'openid':openid,'method':method})
     
 
 def counter(request, _):
