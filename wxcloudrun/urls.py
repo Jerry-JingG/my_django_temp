@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from wxcloudrun import views
-from django.conf.urls import url
+from django.conf.urls import path
 
 urlpatterns = (
     # 计数器接口
@@ -25,5 +25,5 @@ urlpatterns = (
     # url(r'(/)?$', views.index),
 
     # 计数器接口
-    url(r'^^api/signup(/)?$', views.signup),
+    path('signup/', views.signup),
 )
