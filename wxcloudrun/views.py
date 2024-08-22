@@ -38,7 +38,6 @@ def signup(request,_):
     avatar_url=avatar_url,
     wb_id=wb_id,
     amout=amount,
-    created_at=timestamp
     )
     donation.save()
 
