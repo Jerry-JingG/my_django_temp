@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from wxcloudrun.models import Counters
 from wxcloudrun.models import Donation
+from wxcloudrun.recog_bill import recog_bill
 import os
 import requests
 
@@ -41,9 +42,31 @@ def get(request,_):
             data=json.dumps(param)
         )
         response.raise_for_status()  # 检查请求是否成功
-        return JsonResponse(response.json())  # 返回微信 API 的响应内容
+        file_list = response.json().get("file_list", [])
+        if not file_list or file_list[0].get("status") != 0:
+            return JsonResponse({"error": "文件下载链接获取失败"}, status=400)
+
+        download_url = file_list[0].get("download_url")
+        
+        # 5. 下载图片
+        img_response = requests.get(download_url)
+        img_response.raise_for_status()
+
+        # 6. 将图片转为 PIL Image 对象
+        bill=recog_bill(img_response)
+        message_dict=bill.distill_from_bill()
+
+        # 8. 返回识别结果
+        return JsonResponse(message_dict)
+
     except requests.exceptions.RequestException as e:
         return JsonResponse({"error": str(e)}, status=500)
+    
+    
+    #     return JsonResponse(response.json())  # 返回微信 API 的响应内容
+    # except requests.exceptions.RequestException as e:
+    #     return JsonResponse({"error": str(e)}, status=500)
+    
 
 
 def index(request, _):
