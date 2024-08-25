@@ -4,7 +4,7 @@ certifi==2024.7.4
 charset-normalizer==3.3.2
 # Django==5.1
 idna==3.8
-numpy==2.1.0
+numpy==1.24.4
 opencv-python==4.10.0.84
 packaging==24.1
 pillow==10.4.0
