@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     libtesseract-dev \
     build-essential \
+    libopencv-dev \
+    python3-opencv \
     && apt-get clean
 
 # # 选用国内镜像源以提高下载速度
