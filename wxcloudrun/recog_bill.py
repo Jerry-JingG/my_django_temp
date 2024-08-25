@@ -137,19 +137,20 @@ class recog_bill():
             "time":transfer_time,
             "bill":bill_id
         }
+        
+
+
+        # 输出提取的信息
+        print("\n提取出的信息如下：")
+        print(f"给谁付款: {recipient}")
+        print(f"付款金额: {amount}")
+        print(f"当前状态: {status[0] if status else '未找到'}")
+        print(f"收款方备注: {remark[0] if remark else '未找到'}")
+        print(f"付款方留言: {note[0] if note else '未找到'}")
+        print(f"支付方式: {payment_method[0] if payment_method else '未找到'}")
+        print(f"转账时间: {transfer_time[0] if transfer_time else '未找到'}")
+        print(f"转账单号: {bill_id[0] if bill_id else '未找到'}")
         return message_dict
-
-
-        # # 输出提取的信息
-        # print("\n提取出的信息如下：")
-        # print(f"给谁付款: {recipient}")
-        # print(f"付款金额: {amount}")
-        # print(f"当前状态: {status[0] if status else '未找到'}")
-        # print(f"收款方备注: {remark[0] if remark else '未找到'}")
-        # print(f"付款方留言: {note[0] if note else '未找到'}")
-        # print(f"支付方式: {payment_method[0] if payment_method else '未找到'}")
-        # print(f"转账时间: {transfer_time[0] if transfer_time else '未找到'}")
-        # print(f"转账单号: {bill_id[0] if bill_id else '未找到'}")
 
 
 # 打开图片并进行预处理
@@ -158,7 +159,9 @@ image = Image.open(image_path)
 img_response = requests.get("https://7072-prod-7gh8xx1o7d00c9a2-1328894167.tcb.qcloud.la/image/WechatIMG302.jpg")
 img_response.raise_for_status()
 
+
 # 6. 将图片数据转换为 NumPy 数组
 image_np = np.frombuffer(img_response.content, np.uint8)
+image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
 bill=recog_bill(image)
 bill.distill_from_bill()
