@@ -44,7 +44,8 @@ ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
 # 拷贝当前项目到/app目录下(.dockerignore中文件除外)
 COPY . /app
 
-RUN ls -l /app/tessdata/ && \
+RUN ls -l /app && \
+    ls -l /app/tessdata/ && \
     mkdir -p /usr/share/tesseract-ocr/4.00/tessdata/ && \
     cp /app/tessdata/chi_sim.traineddata /usr/share/tesseract-ocr/4.00/tessdata/ && \
     ls -l /usr/share/tesseract-ocr/4.00/tessdata/
