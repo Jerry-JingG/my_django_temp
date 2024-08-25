@@ -45,9 +45,9 @@ ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
 COPY . /app
 
 RUN ls -l /app && \
-    ls -l /app/tessdata/ && \
+    ls -l /app/wxcloudrun/tessdata/ && \
     mkdir -p /usr/share/tesseract-ocr/4.00/tessdata/ && \
-    cp /app/tessdata/chi_sim.traineddata /usr/share/tesseract-ocr/4.00/tessdata/ && \
+    cp /app/wxcloudrun/tessdata/chi_sim.traineddata /usr/share/tesseract-ocr/4.00/tessdata/ && \
     ls -l /usr/share/tesseract-ocr/4.00/tessdata/
 # 设定当前的工作目录
 WORKDIR /app
