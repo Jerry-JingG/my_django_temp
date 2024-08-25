@@ -20,6 +20,7 @@ from django.conf.urls import url
 urlpatterns = (
     # 计数器接口
     url(r'^^api/signup(/)?$', views.signup),
+    url(r'^^api/get(/)?$', views.get),
     # 计数器接口
     url(r'^^api/count(/)?$', views.counter),
 
