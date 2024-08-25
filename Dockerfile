@@ -7,12 +7,21 @@ FROM ubuntu:20.04
 # RUN apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone
 
 # 使用 HTTPS 协议访问容器云调用证书安装
-RUN apk add ca-certificates
+# RUN apk add ca-certificates
+
+# 安装必要的系统依赖和 Python
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    tesseract-ocr \
+    libtesseract-dev \
+    build-essential \
+    && apt-get clean
 
 # # 选用国内镜像源以提高下载速度
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositories \
-&& apk add --update --no-cache python3 py3-pip \
-&& rm -rf /var/cache/apk/*
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositories \
+# && apk add --update --no-cache python3 py3-pip \
+# && rm -rf /var/cache/apk/*
 
 # 选用国内镜像源以提高下载速度
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositories && \
