@@ -154,6 +154,9 @@ class recog_bill():
 
 
 # 打开图片并进行预处理
+print(pytesseract.get_tesseract_version())
+print(pytesseract.pytesseract.tesseract_cmd)
+pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'  # 确认该路径为实际的 tesseract 可执行文件路径
 image_path = "wxcloudrun/image.jpg"
 image = Image.open(image_path)
 img_response = requests.get("https://7072-prod-7gh8xx1o7d00c9a2-1328894167.tcb.qcloud.la/image/3051724486549_.pic.jpg")
