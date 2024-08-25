@@ -9,6 +9,8 @@ from wxcloudrun.models import Donation
 from wxcloudrun.recog_bill import recog_bill
 import os
 import requests
+import cv2
+import numpy as np
 
 
 logger = logging.getLogger('log')
@@ -42,9 +44,6 @@ def get(request,_):
             data=json.dumps(param)
         )
         response.raise_for_status()  # 检查请求是否成功
-        return JsonResponse(response.json())  # 返回微信 API 的响应内容
-    except requests.exceptions.RequestException as e:
-        return JsonResponse({"error": str(e)}, status=500)
         file_list = response.json().get("file_list", [])
         if not file_list or file_list[0].get("status") != 0:
             return JsonResponse({"error": "文件下载链接获取失败"}, status=400)
@@ -55,13 +54,15 @@ def get(request,_):
         img_response = requests.get(download_url)
         img_response.raise_for_status()
 
+        image_np = np.frombuffer(img_response.content, np.uint8)
+        image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
+
         # 6. 将图片转为 PIL Image 对象
-        bill=recog_bill(img_response)
+        bill=recog_bill(image)
         message_dict=bill.distill_from_bill()
 
         # 8. 返回识别结果
         return JsonResponse(message_dict)
-
     except requests.exceptions.RequestException as e:
         return JsonResponse({"error": str(e)}, status=500)
     

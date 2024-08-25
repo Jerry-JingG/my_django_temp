@@ -156,7 +156,7 @@ class recog_bill():
 # 打开图片并进行预处理
 image_path = "wxcloudrun/image.jpg"
 image = Image.open(image_path)
-img_response = requests.get("https://7072-prod-7gh8xx1o7d00c9a2-1328894167.tcb.qcloud.la/image/WechatIMG302.jpg")
+img_response = requests.get("https://7072-prod-7gh8xx1o7d00c9a2-1328894167.tcb.qcloud.la/image/3051724486549_.pic.jpg")
 img_response.raise_for_status()
 
 
