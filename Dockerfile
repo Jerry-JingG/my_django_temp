@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     tesseract-ocr \
     libtesseract-dev \
+    tesseract-ocr-chi-sim \
     build-essential \
     libopencv-dev \
     python3-opencv \
@@ -38,6 +39,8 @@ RUN apt-get update && apt-get install -y \
 #     tesseract-ocr-data-eng \
 #     build-base \
 #     && rm -rf /var/cache/apk/*
+
+ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
 
 # 拷贝当前项目到/app目录下(.dockerignore中文件除外)
 COPY . /app
