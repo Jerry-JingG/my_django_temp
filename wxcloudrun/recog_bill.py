@@ -150,18 +150,18 @@ class recog_bill():
         return message_dict
 
 
-# 打开图片并进行预处理
-print(pytesseract.get_tesseract_version())
-print(pytesseract.pytesseract.tesseract_cmd)
-pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'  # 确认该路径为实际的 tesseract 可执行文件路径
-image_path = "wxcloudrun/image.jpg"
-image = Image.open(image_path)
-img_response = requests.get("https://7072-prod-7gh8xx1o7d00c9a2-1328894167.tcb.qcloud.la/image/3051724486549_.pic.jpg")
-img_response.raise_for_status()
+# # 打开图片并进行预处理
+# print(pytesseract.get_tesseract_version())
+# print(pytesseract.pytesseract.tesseract_cmd)
+# pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'  # 确认该路径为实际的 tesseract 可执行文件路径
+# image_path = "wxcloudrun/image.jpg"
+# image = Image.open(image_path)
+# img_response = requests.get("https://7072-prod-7gh8xx1o7d00c9a2-1328894167.tcb.qcloud.la/image/3051724486549_.pic.jpg")
+# img_response.raise_for_status()
 
 
-# 6. 将图片数据转换为 NumPy 数组
-image_np = np.frombuffer(img_response.content, np.uint8)
-image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
-bill=recog_bill(image)
-bill.distill_from_bill()
+# # 6. 将图片数据转换为 NumPy 数组
+# image_np = np.frombuffer(img_response.content, np.uint8)
+# image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
+# bill=recog_bill(image)
+# bill.distill_from_bill()
