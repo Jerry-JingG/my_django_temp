@@ -29,6 +29,23 @@ class Donation(models.Model):
         return self.openid
     class Meta:
         db_table = 'Donation'  # 数据库表名
+
+class CheckedBill(models.Model):
+    id=models.AutoField(primary_key=True)              #unique id for each bill
+    recipient=models.CharField(max_length=100)
+    amount=models.FloatField()
+    bill_id=models.CharField(max_length=150)
+    wb_id=models.CharField(max_length=100)
+    payment=models.CharField(max_length=100)
+    remark=models.CharField(max_length=100)
+    status=models.CharField(max_length=100)
+    time=models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.bill_id
+    class Meta:
+        db_table='Checked_Bill'
+
     
 
 class TestModel(models.Model):

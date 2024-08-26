@@ -70,11 +70,6 @@ class recog_bill():
             #正常模式
             image_cv = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
             cropped_image=self.crop_relative(image_cv,top,bot,left,right)
-
-
-        # _, cropped_image = cv2.threshold(cropped_image, 150, 255, cv2.THRESH_BINARY_INV)
-        marked_image_path="wxcloudrun/cropped_image.png"
-        cv2.imwrite(marked_image_path,cropped_image)
         text = pytesseract.image_to_string(cropped_image, config=config,lang=lang)
         if lang=='chi_sim':
             cleaned_text=re.sub(r'\s', '', text)
@@ -130,6 +125,8 @@ class recog_bill():
         bill_id=self.extract_between_keywords(message,"转账单号")
 
         message_dict={
+            "to_whom":recipient,
+            "amount":amount,
             "status":status,
             "remark":remark,
             "id":note,
