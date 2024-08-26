@@ -12,7 +12,7 @@ RUN apt-get update && \
 
 # 使用 HTTPS 协议访问容器云调用证书安装
 # RUN apk add ca-certificates
-RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+# RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
 
 # 安装必要的系统依赖和 Python
 RUN apt-get update && apt-get install -y \

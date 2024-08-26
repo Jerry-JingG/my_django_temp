@@ -41,7 +41,8 @@ def get(request,_):
         response = requests.post(
             url="https://api.weixin.qq.com/tcb/batchdownloadfile",
             headers={"Content-Type": "application/json"},
-            data=json.dumps(param)
+            data=json.dumps(param),
+            verify=False
         )
         response.raise_for_status()  # 检查请求是否成功
         file_list = response.json().get("file_list", [])
