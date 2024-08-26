@@ -2,12 +2,10 @@
 # 选择构建用基础镜像（选择原则：在包含所有用到的依赖前提下尽可能体积小）。如需更换，请到[dockerhub官方仓库](https://hub.docker.com/_/python?tab=tags)自行选择后替换。
 # 已知alpine镜像与pytorch有兼容性问题会导致构建失败，如需使用pytorch请务必按需更换基础镜像。
 # FROM alpine:3.13
-FROM ubuntu:20.04
+FROM ubuntu/python:3.8
 # 容器默认时区为UTC，如需使用上海时间请启用以下时区设置命令
 # RUN apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone
-RUN apt-get update && \
-    apt-get install -y tzdata && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 
 # 使用 HTTPS 协议访问容器云调用证书安装
@@ -16,13 +14,13 @@ RUN apt-get update && \
 
 # 安装必要的系统依赖和 Python
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
     tesseract-ocr \
     libtesseract-dev \
     build-essential \
     libopencv-dev \
     python3-opencv \
+    ca-certificates \
+    && update-ca-certificates \
     && apt-get clean
 
 # # 选用国内镜像源以提高下载速度
@@ -45,11 +43,9 @@ ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata/
 # 拷贝当前项目到/app目录下(.dockerignore中文件除外)
 COPY . /app
 
-RUN ls -l /app && \
-    ls -l /app/wxcloudrun/tessdata/ && \
-    mkdir -p /usr/share/tesseract-ocr/4.00/tessdata/ && \
-    cp /app/wxcloudrun/tessdata/chi_sim.traineddata /usr/share/tesseract-ocr/4.00/tessdata/ && \
-    ls -l /usr/share/tesseract-ocr/4.00/tessdata/
+RUN mkdir -p /usr/share/tesseract-ocr/4.00/tessdata/ && \
+    cp /app/wxcloudrun/tessdata/chi_sim.traineddata /usr/share/tesseract-ocr/4.00/tessdata/ 
+    
 # 设定当前的工作目录
 WORKDIR /app
 
